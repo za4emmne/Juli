@@ -5,43 +5,57 @@ using UnityEngine;
 public class VolumeSirena : MonoBehaviour
 {
     [SerializeField] private AudioSource _sirena;
+
     private Coroutine _soundOnJob;
+    private Coroutine _soundOffJob;
+    private float _maxVolume = 1f;
+    private float _minVolume = 0;
+    private float _step = 0.005f;
+    private float _waitSecond = 0.1f;
+
     private void Start()
     {
-         _sirena.volume = 0f;
+        _sirena.volume = _minVolume;
     }
+
+
     public void StartSirena()
     {
+
+        _sirena.Play();
         _soundOnJob = StartCoroutine(SoundOn());
     }
 
     public void StopSirena()
     {
         StopCoroutine(_soundOnJob);
-        var SoundOffJob = StartCoroutine(SoundOff());
-        if (_sirena.volume <= 0.01)
+        _soundOffJob = StartCoroutine(SoundOff());
+
+        if (_sirena.volume <= 0)
+        {
             _sirena.Stop();
+        }
+
     }
 
     public IEnumerator SoundOn()
     {
-        _sirena.Play();
-
-        for (float i = 0; i < 1; i += 0.01f)
+        while (_sirena.volume < _maxVolume)
         {
-            _sirena.volume = i;
+            _sirena.volume = Mathf.MoveTowards(_sirena.volume, _maxVolume, _step);
             Debug.Log(_sirena.volume);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_waitSecond);
         }
     }
 
     private IEnumerator SoundOff()
     {
-        for (float i = _sirena.volume; i >= 0; i -= 0.01f)
+        while (_sirena.volume >= _minVolume)
         {
-            _sirena.volume = i;
+            _sirena.volume = Mathf.MoveTowards(_sirena.volume, _minVolume, _step);
             Debug.Log(_sirena.volume);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(_waitSecond);
         }
+
     }
 }

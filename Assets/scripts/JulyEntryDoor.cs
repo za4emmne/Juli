@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Alarm : MonoBehaviour
+public class JulyEntryDoor : MonoBehaviour
 {
     [SerializeField] private UnityEvent _enter;
 

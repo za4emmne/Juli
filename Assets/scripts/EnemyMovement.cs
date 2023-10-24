@@ -5,11 +5,12 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private Transform _path; // путь
+
     private Transform[] _points; // точки путя
     private int _currentPoint; // текущая точка
     private float _speed = 1;
 
-    void Start()
+    private void Start()
     {
         _points = new Transform[_path.childCount]; //массив по количеству всех точек
 
@@ -18,7 +19,7 @@ public class EnemyMovement : MonoBehaviour
             _points[i] = _path.GetChild(i);
         }
     }
-    void Update()
+    private void Update()
     {
         Transform target = _points[_currentPoint]; // присваиваем положение текущего объекту нашей цели
         transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime); // двигаемя к цели
@@ -37,6 +38,5 @@ public class EnemyMovement : MonoBehaviour
                 _currentPoint = 0;
             }
         }
-
     }
 }

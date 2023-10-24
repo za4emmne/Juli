@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EnterDoor : MonoBehaviour
+public class EventOfAlarm : MonoBehaviour
 {
     [SerializeField] private GameObject _bear;
     [SerializeField] private BoxCollider2D _walls;
     [SerializeField] private GameObject _textExt;
     [SerializeField] private TilemapRenderer _door;
+
     private BoxCollider2D _doorCollider;
 
     private void Start()

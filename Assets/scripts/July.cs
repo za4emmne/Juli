@@ -4,14 +4,4 @@ using UnityEngine;
 
 public class July : MonoBehaviour
 {
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }
