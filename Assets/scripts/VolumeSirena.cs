@@ -21,7 +21,6 @@ public class VolumeSirena : MonoBehaviour
 
     public void StartSirena()
     {
-
         _sirena.Play();
         _soundOnJob = StartCoroutine(SoundOn());
     }
@@ -35,7 +34,6 @@ public class VolumeSirena : MonoBehaviour
         {
             _sirena.Stop();
         }
-
     }
 
     public IEnumerator SoundOn()
@@ -56,6 +54,5 @@ public class VolumeSirena : MonoBehaviour
             Debug.Log(_sirena.volume);
             yield return new WaitForSeconds(_waitSecond);
         }
-
     }
 }
