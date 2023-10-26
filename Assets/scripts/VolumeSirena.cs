@@ -21,13 +21,13 @@ public class VolumeSirena : MonoBehaviour
     public void StartSirena()
     {
         _sirena.Play();
-        _soundOnJob = StartCoroutine(SoundOn());
+        _soundOnJob = StartCoroutine(ChangeVolume(_maxVolume));
     }
 
     public void StopSirena()
     {
         StopCoroutine(_soundOnJob);
-        _soundOffJob = StartCoroutine(SoundOff());
+        _soundOffJob = StartCoroutine(ChangeVolume(_minVolume));
 
         if (_sirena.volume <= 0)
         {
@@ -35,26 +35,12 @@ public class VolumeSirena : MonoBehaviour
         }
     }
 
-    public IEnumerator SoundOn()
+    public IEnumerator ChangeVolume(float targetVolume)
     {
-        while (_sirena.volume < _maxVolume)
+        while (true)
         {
-            ChangeVolume(_maxVolume);
+            _sirena.volume = Mathf.MoveTowards(_sirena.volume, targetVolume, _step);
             yield return new WaitForSeconds(_waitSecond);
         }
-    }
-
-    private IEnumerator SoundOff()
-    {
-        while (_sirena.volume >= _minVolume)
-        {
-            ChangeVolume(_minVolume);
-            yield return new WaitForSeconds(_waitSecond);
-        }
-    }
-
-    private void ChangeVolume(float targetVolume)
-    {
-        _sirena.volume = Mathf.MoveTowards(_sirena.volume, targetVolume, _step);
     }
 }
