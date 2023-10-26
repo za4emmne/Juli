@@ -18,7 +18,6 @@ public class VolumeSirena : MonoBehaviour
         _sirena.volume = _minVolume;
     }
 
-
     public void StartSirena()
     {
         _sirena.Play();
@@ -41,7 +40,6 @@ public class VolumeSirena : MonoBehaviour
         while (_sirena.volume < _maxVolume)
         {
             ChangeVolume(_maxVolume);
-            //_sirena.volume = Mathf.MoveTowards(_sirena.volume, _maxVolume, _step);
             yield return new WaitForSeconds(_waitSecond);
         }
     }
@@ -51,7 +49,6 @@ public class VolumeSirena : MonoBehaviour
         while (_sirena.volume >= _minVolume)
         {
             ChangeVolume(_minVolume);
-            //_sirena.volume = Mathf.MoveTowards(_sirena.volume, _minVolume, _step);
             yield return new WaitForSeconds(_waitSecond);
         }
     }
